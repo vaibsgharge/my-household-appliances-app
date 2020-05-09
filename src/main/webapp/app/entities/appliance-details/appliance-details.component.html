@@ -1,0 +1,91 @@
+<div>
+    <h2 id="page-heading">
+        <span>Appliance Details</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-appliance-details" [routerLink]="['/appliance-details/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Appliance Details
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="applianceDetails?.length === 0">
+        <span>No applianceDetails found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="applianceDetails?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="serialNumber"><span>Serial Number</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="applianceName"><span>Appliance Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="applianceDesc"><span>Appliance Desc</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="categoryId"><span>Category Id</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="status"><span>Status</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="applianceBrand"><span>Appliance Brand</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="applianceModel"><span>Appliance Model</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="purchaseId"><span>Purchase Id</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createdAt"><span>Created At</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="updatedAt"><span>Updated At</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="purchasesId"><span>Purchases</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="categoriesId"><span>Categories</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let applianceDetails of applianceDetails ;trackBy: trackId">
+                    <td><a [routerLink]="['/appliance-details', applianceDetails.id, 'view']">{{ applianceDetails.id }}</a></td>
+                    <td>{{ applianceDetails.serialNumber }}</td>
+                    <td>{{ applianceDetails.applianceName }}</td>
+                    <td>{{ applianceDetails.applianceDesc }}</td>
+                    <td>{{ applianceDetails.categoryId }}</td>
+                    <td>{{ applianceDetails.status }}</td>
+                    <td>{{ applianceDetails.applianceBrand }}</td>
+                    <td>{{ applianceDetails.applianceModel }}</td>
+                    <td>{{ applianceDetails.purchaseId }}</td>
+                    <td>{{ applianceDetails.createdAt | date:'mediumDate' }}</td>
+                    <td>{{ applianceDetails.updatedAt | date:'mediumDate' }}</td>
+                    <td>
+                        <div *ngIf="applianceDetails.purchasesId">
+                            <a [routerLink]="['/purchase-history', applianceDetails.purchasesId , 'view']" >{{ applianceDetails.purchasesId }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="applianceDetails.categoriesId">
+                            <a [routerLink]="['/appliance-categories', applianceDetails.categoriesId , 'view']" >{{ applianceDetails.categoriesId }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/appliance-details', applianceDetails.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/appliance-details', applianceDetails.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(applianceDetails)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

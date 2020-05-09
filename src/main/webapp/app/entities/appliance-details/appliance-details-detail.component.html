@@ -1,0 +1,78 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="applianceDetails">
+            <h2><span>Appliance Details</span> {{ applianceDetails.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Serial Number</span></dt>
+                <dd>
+                    <span>{{ applianceDetails.serialNumber }}</span>
+                </dd>
+                <dt><span>Appliance Name</span></dt>
+                <dd>
+                    <span>{{ applianceDetails.applianceName }}</span>
+                </dd>
+                <dt><span>Appliance Desc</span></dt>
+                <dd>
+                    <span>{{ applianceDetails.applianceDesc }}</span>
+                </dd>
+                <dt><span>Category Id</span></dt>
+                <dd>
+                    <span>{{ applianceDetails.categoryId }}</span>
+                </dd>
+                <dt><span>Status</span></dt>
+                <dd>
+                    <span>{{ applianceDetails.status }}</span>
+                </dd>
+                <dt><span>Appliance Brand</span></dt>
+                <dd>
+                    <span>{{ applianceDetails.applianceBrand }}</span>
+                </dd>
+                <dt><span>Appliance Model</span></dt>
+                <dd>
+                    <span>{{ applianceDetails.applianceModel }}</span>
+                </dd>
+                <dt><span>Purchase Id</span></dt>
+                <dd>
+                    <span>{{ applianceDetails.purchaseId }}</span>
+                </dd>
+                <dt><span>Created At</span></dt>
+                <dd>
+                    <span>{{ applianceDetails.createdAt }}</span>
+                </dd>
+                <dt><span>Updated At</span></dt>
+                <dd>
+                    <span>{{ applianceDetails.updatedAt }}</span>
+                </dd>
+                <dt><span>Purchases</span></dt>
+                <dd>
+                    <div *ngIf="applianceDetails.purchasesId">
+                        <a [routerLink]="['/purchase-history', applianceDetails.purchasesId, 'view']">{{ applianceDetails.purchasesId }}</a>
+                    </div>
+                </dd>
+                <dt><span>Categories</span></dt>
+                <dd>
+                    <div *ngIf="applianceDetails.categoriesId">
+                        <a [routerLink]="['/appliance-categories', applianceDetails.categoriesId, 'view']">{{ applianceDetails.categoriesId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/appliance-details', applianceDetails.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+{
+    "name": "PurchaseHistory",
+    "fields": [
+        {
+            "fieldName": "serialNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "purchaseDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "createdAt",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "updatedAt",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20200509045500",
+    "javadoc": "The Appliance Purchase entity.",
+    "entityTableName": "purchase_history",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

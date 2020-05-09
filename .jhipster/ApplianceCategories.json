@@ -1,0 +1,50 @@
+{
+    "name": "ApplianceCategories",
+    "fields": [
+        {
+            "fieldName": "categoryName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "categoryDesc",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "createdAt",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "updatedAt",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "applianceDetails",
+            "otherEntityRelationshipName": "categories",
+            "relationshipName": "appliances"
+        }
+    ],
+    "changelogDate": "20200509045300",
+    "javadoc": "The Appliance Category entity.",
+    "entityTableName": "appliance_categories",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

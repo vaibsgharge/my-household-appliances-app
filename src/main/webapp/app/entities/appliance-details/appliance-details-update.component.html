@@ -1,0 +1,131 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-appliance-details-heading">Create or edit a Appliance Details</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_serialNumber">Serial Number</label>
+                    <input type="text" class="form-control" name="serialNumber" id="field_serialNumber"
+                           formControlName="serialNumber"/>
+                    <div *ngIf="editForm.get('serialNumber')!.invalid && (editForm.get('serialNumber')!.dirty || editForm.get('serialNumber')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('serialNumber')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_applianceName">Appliance Name</label>
+                    <input type="text" class="form-control" name="applianceName" id="field_applianceName"
+                           formControlName="applianceName"/>
+                    <div *ngIf="editForm.get('applianceName')!.invalid && (editForm.get('applianceName')!.dirty || editForm.get('applianceName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('applianceName')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_applianceDesc">Appliance Desc</label>
+                    <input type="text" class="form-control" name="applianceDesc" id="field_applianceDesc"
+                           formControlName="applianceDesc"/>
+                    <div *ngIf="editForm.get('applianceDesc')!.invalid && (editForm.get('applianceDesc')!.dirty || editForm.get('applianceDesc')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('applianceDesc')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_categoryId">Category Id</label>
+                    <input type="number" class="form-control" name="categoryId" id="field_categoryId"
+                           formControlName="categoryId"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_status">Status</label>
+                    <select class="form-control" name="status" formControlName="status" id="field_status">
+                        <option value="OLD">OLD</option>
+                        <option value="UNUSED">UNUSED</option>
+                        <option value="SOLD">SOLD</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_applianceBrand">Appliance Brand</label>
+                    <input type="text" class="form-control" name="applianceBrand" id="field_applianceBrand"
+                           formControlName="applianceBrand"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_applianceModel">Appliance Model</label>
+                    <input type="text" class="form-control" name="applianceModel" id="field_applianceModel"
+                           formControlName="applianceModel"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_purchaseId">Purchase Id</label>
+                    <input type="number" class="form-control" name="purchaseId" id="field_purchaseId"
+                           formControlName="purchaseId"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_createdAt">Created At</label>
+                    <div class="input-group">
+                        <input id="field_createdAt" type="text" class="form-control" name="createdAt" ngbDatepicker #createdAtDp="ngbDatepicker" formControlName="createdAt"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="createdAtDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_updatedAt">Updated At</label>
+                    <div class="input-group">
+                        <input id="field_updatedAt" type="text" class="form-control" name="updatedAt" ngbDatepicker #updatedAtDp="ngbDatepicker" formControlName="updatedAt"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="updatedAtDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_purchases">Purchases</label>
+                    <select class="form-control" id="field_purchases" name="purchases" formControlName="purchasesId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="purchaseHistoryOption.id" *ngFor="let purchaseHistoryOption of purchases; trackBy: trackById">{{ purchaseHistoryOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_categories">Categories</label>
+                    <select class="form-control" id="field_categories" name="categories" formControlName="categoriesId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="applianceCategoriesOption.id" *ngFor="let applianceCategoriesOption of appliancecategories; trackBy: trackById">{{ applianceCategoriesOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

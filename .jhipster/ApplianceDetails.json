@@ -1,0 +1,84 @@
+{
+    "name": "ApplianceDetails",
+    "fields": [
+        {
+            "fieldName": "serialNumber",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "applianceName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "applianceDesc",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "categoryId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "Status",
+            "fieldValues": "OLD,UNUSED,SOLD"
+        },
+        {
+            "fieldName": "applianceBrand",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "applianceModel",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "purchaseId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "createdAt",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "updatedAt",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "purchaseHistory",
+            "otherEntityRelationshipName": "applianceDetails",
+            "relationshipName": "purchases",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "applianceCategories",
+            "otherEntityRelationshipName": "appliances",
+            "relationshipName": "categories",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200509045400",
+    "javadoc": "The Appliance Details entity.",
+    "entityTableName": "appliance_details",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
